@@ -11,13 +11,15 @@ $(document).ready(function () {
     "5 PM",
   ];
 
-
   function createRows(index) {
-    var storeEvent = "input" + index;
-    var getText = localStorage.getItem(storeEvent);
-    console.log(getText);
+      $('input[type="text"]').each(function () {
+        var id = $(this).attr("class");
+        var value = localStorage.getItem(id);
+
+        $(this).val(value);
+      });
     $("#main-column").append(
-      $(` <div class="card" data-id="${index}">
+      $(` <div class="card">
     <div class="card-body">
       <div class="form-row">
         <div class="col-time">
@@ -29,8 +31,9 @@ $(document).ready(function () {
             <input
               class="form-control"
               type="text"
+              id="get-info"
               placeholder="Add Event"
-              value=${getText}
+              
             />
           </div>
         </div>
@@ -46,9 +49,8 @@ $(document).ready(function () {
     </div>
   </div>`)
     );
-    
   }
-/*   for (var t = 0; t < workHours.length; t++) {
+  /*   for (var t = 0; t < workHours.length; t++) {
     var getHours = $('<p>');
     console.log(workHours[t]);
     getHours.text(workHours[t]); 
@@ -57,12 +59,13 @@ $(document).ready(function () {
 
   for (var i = 0; i < 9; i++) {
     createRows(i);
-  }  for (var i = 0; i < workHours.length; i++){
-    var newTime = $("<p>");
-    newTime.text(workHours[i]);
-    $(".col-time").append(newTime[i++]);
   }
-  
+  for (var t = 0; t < workHours.length; t++) {
+    var newTime = $("<p>");
+    newTime.text(workHours[t]);
+    $(".col-time").append(newTime[t]);
+  }
+
   var currentDate = moment().format("dddd, MMMM Do YYYY");
   $("#current-date").append(currentDate);
   console.log(currentDate);
@@ -70,7 +73,7 @@ $(document).ready(function () {
   var currentTime = moment().format("h:mm:ss a");
   console.log(currentTime);
 
-  $(".btn").on("submit", function () {
+  /*   $(".btn").on("submit", function () {
     var inputEl = $(".form-control").val();
     console.log(inputEl);
   });
@@ -79,5 +82,12 @@ $(document).ready(function () {
     event.preventDefault();
     var storeEvent = "input" + $(this).attr("data-id");
     localStorage.setItem(storeEvent, $(this).find("input").val());
+  }); */
+  $(".btn").on("click", function () {
+    $('input[type="text"]').each(function () {
+      var id = $(this).attr("id");
+      var value = $(this).val();
+      localStorage.setItem(id, value);
+    });
   });
 });
