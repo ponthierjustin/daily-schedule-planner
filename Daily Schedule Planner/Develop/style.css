@@ -73,4 +73,10 @@ textarea{
 .card {
   padding: 20px;
   margin: 20px;
+  align-content: center;
 }
+
+.col-time{
+  margin-left: 200px;
+}
+

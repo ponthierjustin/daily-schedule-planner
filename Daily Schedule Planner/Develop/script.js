@@ -12,12 +12,10 @@ $(document).ready(function () {
   ];
 
   function createRows(index) {
-      $('input[type="text"]').each(function () {
-        var id = $(this).attr("class");
-        var value = localStorage.getItem(id);
+    var id = $(this).attr("id");
+    var value = localStorage.getItem(id);
+    $(this).val(value);
 
-        $(this).val(value);
-      });
     $("#main-column").append(
       $(` <div class="card">
     <div class="card-body">
@@ -50,19 +48,14 @@ $(document).ready(function () {
   </div>`)
     );
   }
-  /*   for (var t = 0; t < workHours.length; t++) {
-    var getHours = $('<p>');
-    console.log(workHours[t]);
-    getHours.text(workHours[t]); 
-    $(".form-row").text(workHours[t]);
-  } */
 
   for (var i = 0; i < 9; i++) {
     createRows(i);
   }
   for (var t = 0; t < workHours.length; t++) {
     var newTime = $("<p>");
-    newTime.text(workHours[t]);
+    newTime.attr("id");
+    newTime.append(workHours[t]);
     $(".col-time").append(newTime[t]);
   }
 
@@ -73,21 +66,11 @@ $(document).ready(function () {
   var currentTime = moment().format("h:mm:ss a");
   console.log(currentTime);
 
-  /*   $(".btn").on("submit", function () {
-    var inputEl = $(".form-control").val();
-    console.log(inputEl);
-  });
-
-  $(".card").on("submit", function (event) {
-    event.preventDefault();
-    var storeEvent = "input" + $(this).attr("data-id");
-    localStorage.setItem(storeEvent, $(this).find("input").val());
-  }); */
   $(".btn").on("click", function () {
     $('input[type="text"]').each(function () {
-      var id = $(this).attr("id");
+      var id = $(this).attr("");
       var value = $(this).val();
-      localStorage.setItem(id, value);
+      localStorage.setItem(id, JSON.stringify(value));
     });
   });
 });
